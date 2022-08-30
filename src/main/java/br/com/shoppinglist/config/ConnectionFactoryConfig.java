@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
-public class ConnectionDBConfig {
+public class ConnectionFactoryConfig {
     private static String urlDb = PropertyConfig.getProperty("url.db.connection");
     private static String passDb = PropertyConfig.getProperty("pass.db.connection");
     private static String userDb = PropertyConfig.getProperty("user.db.connection");
