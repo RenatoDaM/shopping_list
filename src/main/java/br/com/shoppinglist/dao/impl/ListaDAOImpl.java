@@ -33,7 +33,12 @@ public class ListaDAOImpl implements CrudDAO {
     }
 
     @Override
-    public List<Lista> readList() {
+    public Lista readById(Integer id) {
+        return null;
+    }
+
+    @Override
+    public List<Lista> readAll() {
         Connection connection = ConnectionFactoryConfig.getConnectionDBConfig();
         PreparedStatement statement = null;
         String sql = "SELECT * FROM lista";

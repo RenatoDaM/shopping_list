@@ -7,12 +7,13 @@ public interface CrudDAO {
     void save(Object o);
 
     /*
-     * Utilização de Generics do Java no método readeList, onde o método recebe a qualquer objeto, se tornando genérico.
-     * Para isso usamos uma letra maiuscula, geralmente o E para definir o método como genérico, seguindo a implementação abaixo.
-     * Desa froma podemos usar esse método para qualquer umas das DAOs, passando qualquer model.
+     * Utilização de Generics do Java no método readAll e readById, onde o método recebe ou devolve qualquer objeto, se tornando genérico.
+     * Para isso usamos uma letra maiuscula, geralmente o E ou T para definir o método como genérico, seguindo as implementações abaixo.
+     * Dessa forma podemos usar esse método para qualquer uma das DAOs, passando qualquer model.
      */
-    <E> List<E> readList();
-    
+    <E> List<E> readAll();
+    <E> E readById(Integer id);
+
     void update(Object o);
     void delete(Object o);
 
