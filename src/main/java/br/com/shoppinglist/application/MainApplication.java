@@ -1,6 +1,7 @@
 package main.java.br.com.shoppinglist.application;
 
 import main.java.br.com.shoppinglist.config.ConnectionFactoryConfig;
+
 import java.io.IOException;
 
 public class MainApplication {

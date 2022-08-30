@@ -34,6 +34,21 @@ public class ListaDAOImpl implements CrudDAO {
 
     @Override
     public Lista readById(Integer id) {
+        Connection connection = ConnectionFactoryConfig.getConnectionDBConfig();
+        PreparedStatement statement = null;
+        String sql = "SELECT * FROM lista WHERE lista_id = ?";
+        try{
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                Lista lista = new Lista(resultSet.getInt("lista_id"), resultSet.getString("lista_desc"),
+                        resultSet.getDouble("lista_valor_total"), resultSet.getInt("lista_qtd_item"));
+                return lista;
+            }
+        }catch (SQLException e){
+            System.out.println("Erro ao executar query - SELECT BY ID " + e);
+        }
         return null;
     }
 
@@ -47,14 +62,13 @@ public class ListaDAOImpl implements CrudDAO {
             statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
-                Lista lista = new Lista(resultSet.getInt("lista_id"),
-                        resultSet.getString("lista_desc"),
-                        resultSet.getDouble("lista_valor_total"));
+                Lista lista = new Lista(resultSet.getInt("lista_id"), resultSet.getString("lista_desc"),
+                        resultSet.getDouble("lista_valor_total"), resultSet.getInt("lista_qtd_item"));
                 listas.add(lista);
             }
             return listas;
         }catch (SQLException e){
-            System.out.println("Erro ao executar query - INSERT " + e);
+            System.out.println("Erro ao executar query - SELECT ALL " + e);
         }finally {
             closeConnections(statement, connection);
         }
@@ -63,12 +77,41 @@ public class ListaDAOImpl implements CrudDAO {
 
     @Override
     public void update(Object o) {
-
+        Lista lista = (Lista) o;
+        Connection connection = ConnectionFactoryConfig.getConnectionDBConfig();
+        PreparedStatement statement = null;
+        String sql = "UPDATE lista SET lista_desc = ?, lista_valor_total = ?, lista_qtd_item = ? " +
+                "WHERE lista_id = ? ";
+        try{
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, lista.getDesc());
+            statement.setDouble(2, lista.getValorTotal());
+            statement.setInt(3, lista.getQtdItens());
+            statement.setInt(4, lista.getId());
+            statement.execute();
+            System.out.println("Lista --- " + lista.getDesc() + " --- atualizada com sucesso ");
+        }catch (SQLException e){
+            System.out.println("Erro ao executar query - UPDATE " + e);
+        }finally {
+            closeConnections(statement, connection);
+        }
     }
 
     @Override
-    public void delete(Object o) {
-
+    public void delete(Integer id) {
+        Connection connection = ConnectionFactoryConfig.getConnectionDBConfig();
+        PreparedStatement statement = null;
+        String sql = "DELETE FROM lista WHERE lista_id = ?";
+        try{
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.execute();
+            System.out.println("Lista de id " + id + " deletada com sucesso ");
+        }catch (SQLException e){
+            System.out.println("Erro ao executar query - UPDATE " + e);
+        }finally {
+            closeConnections(statement, connection);
+        }
     }
 
     private void closeConnections(PreparedStatement statement, Connection connection){

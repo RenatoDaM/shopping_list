@@ -24,7 +24,8 @@ USE `db_shopping_list` ;
 CREATE TABLE IF NOT EXISTS `db_shopping_list`.`Lista` (
   `lista_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `lista_desc` VARCHAR(60) NOT NULL,
-  `lista_valor_total` FLOAT NOT NULL,
+  `lista_valor_total` FLOAT NULL,
+  `lista_qtd_item` INT NULL,
   PRIMARY KEY (`lista_id`))
 ENGINE = InnoDB;
 
