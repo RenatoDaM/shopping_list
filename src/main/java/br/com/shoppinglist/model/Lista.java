@@ -51,6 +51,6 @@ public class Lista {
 
     @Override
     public String toString() {
-        return "id=" + id + ", desc='" + desc + '\'' + ", valorTotal=" + valorTotal + ", qtdItens=" + qtdItens;
+        return " [id=" + id + ", desc='" + desc + '\'' + ", valorTotal=" + valorTotal + ", qtdItens=" + qtdItens + "] ";
     }
 }

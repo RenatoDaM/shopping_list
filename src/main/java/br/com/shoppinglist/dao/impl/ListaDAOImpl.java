@@ -16,15 +16,15 @@ public class ListaDAOImpl implements CrudDAO {
     @Override
     public void save(Object o) {
         Lista lista = (Lista) o;
-        String sql = "INSERT INTO lista (lista_desc, lista_valor_total) VALUES (?, ?)";
+        String sql = "INSERT INTO lista (lista_desc) VALUES (?)";
         Connection connection = ConnectionFactoryConfig.getConnectionDBConfig();
         PreparedStatement statement = null;
         try{
-            statement = connection.prepareStatement(sql);
-            statement.setString(1, lista.getDesc());
-            statement.setDouble(2, lista.getValorTotal());
-            statement.execute();
-            System.out.println("Lista --- " + lista.getDesc() + " --- salva com sucesso ");
+            if(connection != null)
+                statement = connection.prepareStatement(sql);
+                statement.setString(1, lista.getDesc());
+                statement.execute();
+                System.out.println("Lista --- " + lista.getDesc() + " --- criada com sucesso ");
         }catch (SQLException e){
             System.out.println("Erro ao executar query - INSERT " + e);
         }finally {
@@ -38,16 +38,19 @@ public class ListaDAOImpl implements CrudDAO {
         PreparedStatement statement = null;
         String sql = "SELECT * FROM lista WHERE lista_id = ?";
         try{
-            statement = connection.prepareStatement(sql);
-            statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()){
-                Lista lista = new Lista(resultSet.getInt("lista_id"), resultSet.getString("lista_desc"),
-                        resultSet.getDouble("lista_valor_total"), resultSet.getInt("lista_qtd_item"));
-                return lista;
-            }
+            if(connection != null)
+                statement = connection.prepareStatement(sql);
+                statement.setInt(1, id);
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()){
+                    Lista lista = new Lista(resultSet.getInt("lista_id"), resultSet.getString("lista_desc"),
+                            resultSet.getDouble("lista_valor_total"), resultSet.getInt("lista_qtd_item"));
+                    return lista;
+                }
         }catch (SQLException e){
             System.out.println("Erro ao executar query - SELECT BY ID " + e);
+        }finally {
+            closeConnections(statement, connection);
         }
         return null;
     }
@@ -59,14 +62,15 @@ public class ListaDAOImpl implements CrudDAO {
         String sql = "SELECT * FROM lista";
         try{
             List<Lista> listas = new ArrayList<>();
-            statement = connection.prepareStatement(sql);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()){
-                Lista lista = new Lista(resultSet.getInt("lista_id"), resultSet.getString("lista_desc"),
-                        resultSet.getDouble("lista_valor_total"), resultSet.getInt("lista_qtd_item"));
-                listas.add(lista);
-            }
-            return listas;
+            if(connection != null)
+                statement = connection.prepareStatement(sql);
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()){
+                    Lista lista = new Lista(resultSet.getInt("lista_id"), resultSet.getString("lista_desc"),
+                            resultSet.getDouble("lista_valor_total"), resultSet.getInt("lista_qtd_item"));
+                    listas.add(lista);
+                }
+                return listas;
         }catch (SQLException e){
             System.out.println("Erro ao executar query - SELECT ALL " + e);
         }finally {
@@ -83,13 +87,14 @@ public class ListaDAOImpl implements CrudDAO {
         String sql = "UPDATE lista SET lista_desc = ?, lista_valor_total = ?, lista_qtd_item = ? " +
                 "WHERE lista_id = ? ";
         try{
-            statement = connection.prepareStatement(sql);
-            statement.setString(1, lista.getDesc());
-            statement.setDouble(2, lista.getValorTotal());
-            statement.setInt(3, lista.getQtdItens());
-            statement.setInt(4, lista.getId());
-            statement.execute();
-            System.out.println("Lista --- " + lista.getDesc() + " --- atualizada com sucesso ");
+            if(connection != null)
+                statement = connection.prepareStatement(sql);
+                statement.setString(1, lista.getDesc());
+                statement.setDouble(2, lista.getValorTotal());
+                statement.setInt(3, lista.getQtdItens());
+                statement.setInt(4, lista.getId());
+                statement.execute();
+                System.out.println("Lista --- " + lista.getDesc() + " --- atualizada com sucesso ");
         }catch (SQLException e){
             System.out.println("Erro ao executar query - UPDATE " + e);
         }finally {
@@ -103,12 +108,13 @@ public class ListaDAOImpl implements CrudDAO {
         PreparedStatement statement = null;
         String sql = "DELETE FROM lista WHERE lista_id = ?";
         try{
-            statement = connection.prepareStatement(sql);
-            statement.setInt(1, id);
-            statement.execute();
-            System.out.println("Lista de id " + id + " deletada com sucesso ");
+            if(connection != null)
+                statement = connection.prepareStatement(sql);
+                statement.setInt(1, id);
+                statement.execute();
+                System.out.println("Lista de id " + id + " deletada com sucesso ");
         }catch (SQLException e){
-            System.out.println("Erro ao executar query - UPDATE " + e);
+            System.out.println("Erro ao executar query - DELETE " + e);
         }finally {
             closeConnections(statement, connection);
         }
@@ -116,12 +122,8 @@ public class ListaDAOImpl implements CrudDAO {
 
     private void closeConnections(PreparedStatement statement, Connection connection){
         try{
-            if(statement != null){
-                statement.close();
-            }
-            if(connection != null){
-                connection.close();
-            }
+            if(statement != null) statement.close();
+            if(connection != null) connection.close();
         }catch (SQLException e){
             System.out.println("Erro ao tentar fechar conexões de banco " + e);
         }
