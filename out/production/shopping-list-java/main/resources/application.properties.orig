@@ -1,0 +1,4 @@
+class.drive.db.connection=com.mysql.cj.jdbc.Driver
+url.db.connection=jdbc:mysql://localhost:3306/db_shopping_list
+pass.db.connection=73ren0822!!davoli
+user.db.connection=root
