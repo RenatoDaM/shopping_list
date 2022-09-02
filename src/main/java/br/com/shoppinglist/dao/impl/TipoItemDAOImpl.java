@@ -1,6 +1,7 @@
-package main.java.br.com.shoppinglist.dao;
+package main.java.br.com.shoppinglist.dao.impl;
 
-import main.java.br.com.shoppinglist.config.ConnectionDBConfig;
+
+import main.java.br.com.shoppinglist.config.ConnectionFactoryConfig;
 import main.java.br.com.shoppinglist.model.TipoItem;
 
 import java.sql.Connection;
@@ -9,7 +10,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TipoItemDAO {
+public class TipoItemDAOImpl {
 
     public void save(TipoItem tipoItem) {
         String sql = "INSERT INTO Tipo_Item(tipo_item_id, tipo_item_desc) VALUES (?, ?)";
@@ -19,7 +20,7 @@ public class TipoItemDAO {
 
         try {
             //Aqui criei uma conexão com o banco de dados, usando o método estático da classe ConnectionDBConfig
-            conn = ConnectionDBConfig.getConnectionDBConfig();
+            conn = ConnectionFactoryConfig.getConnectionDBConfig();
 
             //PreparedStatement pra executar uma query
             pStm = conn.prepareStatement(sql);
@@ -58,7 +59,7 @@ public class TipoItemDAO {
         ResultSet rSet = null;
 
         try {
-            conn = ConnectionDBConfig.getConnectionDBConfig();
+            conn = ConnectionFactoryConfig.getConnectionDBConfig();
             pStm = conn.prepareStatement(sql);
             rSet = pStm.executeQuery();
 
