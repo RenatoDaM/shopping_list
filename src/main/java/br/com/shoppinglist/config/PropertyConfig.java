@@ -21,6 +21,7 @@ public class PropertyConfig {
         }catch (IOException e){
             System.out.println("Erro ao ler o arquivo properties - " + e);
             return null;
+
         }
     }
 }
