@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MainApplication {
-    /*public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
 
         Scanner sc = new Scanner(System.in);
         Integer opcao = 0;
@@ -42,7 +42,7 @@ public class MainApplication {
                     break;
             }
         }while (opcao != 0);
-    }*/
+    }
 
     public static void criarLista(Scanner sc){
         System.out.println(" +--------------------------------------+ ");
@@ -98,6 +98,7 @@ public class MainApplication {
 
     }
 
-    }
+}
+
 
 
