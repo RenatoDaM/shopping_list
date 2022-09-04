@@ -1,4 +1,4 @@
-package main.java.br.com.shoppinglist.config;
+package br.com.shoppinglist.config;
 
 import java.io.FileInputStream;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package main.java.br.com.shoppinglist.model;
+package br.com.shoppinglist.model;
 
 public class TipoItem {
     private int id;
@@ -17,9 +17,15 @@ public class TipoItem {
         return desc;
     }
 
-    public void setDesc(String desconto) {
-        this.desc = desconto;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
-
+    @Override
+    public String toString() {
+        return
+                "id=" + id +
+                ", desc='" + desc + '\''
+                ;
+    }
 }
