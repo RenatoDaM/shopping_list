@@ -1,7 +1,7 @@
-package main.java.br.com.shoppinglist.application;
+package br.com.shoppinglist.application;
 
-import main.java.br.com.shoppinglist.model.Lista;
-import main.java.br.com.shoppinglist.service.ListaDeCompraService;
+import br.com.shoppinglist.model.Lista;
+import br.com.shoppinglist.service.ListaDeCompraService;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,11 +17,9 @@ public class MainApplication {
             switch (opcao){
                 case 1:
                     System.out.println(" +-- Buscando listas de compras --------+ ");
-
                     System.out.println(" ");
                     getListas();
                     System.out.println(" ");
-
                     consoleMostrarMiniMenu();
                     opcao = validarMiniMenu(sc);
                     break;
@@ -29,7 +27,6 @@ public class MainApplication {
                     System.out.println(" +-- Criar lista de compras ------------+ ");
                     criarLista(sc);
                     System.out.println(" ");
-
                     consoleMostrarMiniMenu();
                     opcao = validarMiniMenu(sc);
                     break;
@@ -74,6 +71,7 @@ public class MainApplication {
         System.out.println(" +-- MENU [Escolha uma opção] ----------+ ");
         System.out.println(" +-- [ 1 ] Buscar listas de compras ----+ ");
         System.out.println(" +-- [ 2 ] Criar lista de compras ------+ ");
+        // próximo menu a ser incluído  ->  System.out.println(" +-- [ 3 ] Incluir itens em uma lista --+ ");
         System.out.println(" +-- [ 0 ] Sair ------------------------+ ");
         System.out.println(" +--------------------------------------+ ");
     }

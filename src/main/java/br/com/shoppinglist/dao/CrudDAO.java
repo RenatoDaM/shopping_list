@@ -1,4 +1,4 @@
-package main.java.br.com.shoppinglist.dao;
+package br.com.shoppinglist.dao;
 
 import java.util.List;
 

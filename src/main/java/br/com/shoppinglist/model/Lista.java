@@ -1,4 +1,4 @@
-package main.java.br.com.shoppinglist.model;
+package br.com.shoppinglist.model;
 
 public class Lista {
 
