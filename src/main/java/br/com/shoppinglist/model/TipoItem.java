@@ -1,3 +1,4 @@
+
 package br.com.shoppinglist.model;
 
 public class TipoItem {
@@ -19,13 +20,16 @@ public class TipoItem {
 
     public void setDesc(String desc) {
         this.desc = desc;
+
     }
 
     @Override
     public String toString() {
+
         return
                 "id=" + id +
                 ", desc='" + desc + '\''
                 ;
+
     }
 }
