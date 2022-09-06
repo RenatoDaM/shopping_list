@@ -1,4 +1,4 @@
-package main.java.br.com.shoppinglist.config;
+package br.com.shoppinglist.config;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -21,6 +21,7 @@ public class PropertyConfig {
         }catch (IOException e){
             System.out.println("Erro ao ler o arquivo properties - " + e);
             return null;
+
         }
     }
 }

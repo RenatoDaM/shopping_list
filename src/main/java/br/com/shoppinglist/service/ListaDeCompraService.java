@@ -1,8 +1,8 @@
-package main.java.br.com.shoppinglist.service;
+package br.com.shoppinglist.service;
 
-import main.java.br.com.shoppinglist.dao.CrudDAO;
-import main.java.br.com.shoppinglist.dao.impl.ListaDAOImpl;
-import main.java.br.com.shoppinglist.model.Lista;
+import br.com.shoppinglist.dao.CrudDAO;
+import br.com.shoppinglist.dao.impl.ListaDAOImpl;
+import br.com.shoppinglist.model.Lista;
 
 import java.util.List;
 

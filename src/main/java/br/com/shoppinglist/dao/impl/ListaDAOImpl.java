@@ -1,8 +1,8 @@
-package main.java.br.com.shoppinglist.dao.impl;
+package br.com.shoppinglist.dao.impl;
 
-import main.java.br.com.shoppinglist.config.ConnectionFactoryConfig;
-import main.java.br.com.shoppinglist.dao.CrudDAO;
-import main.java.br.com.shoppinglist.model.Lista;
+import br.com.shoppinglist.config.ConnectionFactoryConfig;
+import br.com.shoppinglist.dao.CrudDAO;
+import br.com.shoppinglist.model.Lista;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

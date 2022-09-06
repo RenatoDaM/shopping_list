@@ -1,18 +1,18 @@
-package main.java.br.com.shoppinglist.application;
+package br.com.shoppinglist.application;
 
-import main.java.br.com.shoppinglist.model.Lista;
-import main.java.br.com.shoppinglist.service.ListaDeCompraService;
-
+import br.com.shoppinglist.model.Lista;
+import br.com.shoppinglist.service.ListaDeCompraService;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 public class MainApplication {
     public static void main(String[] args) throws IOException {
+
         Scanner sc = new Scanner(System.in);
         Integer opcao = 0;
         do{
-            consoleMostrarMenuPrinciapl();
+            consoleMostrarMenuPrincipal();
             opcao = Integer.parseInt(sc.nextLine());
             switch (opcao){
                 case 1:
@@ -67,7 +67,7 @@ public class MainApplication {
         }
     }
 
-    public static void consoleMostrarMenuPrinciapl(){
+    public static void consoleMostrarMenuPrincipal(){
         System.out.println(" +--------------------------------------+ ");
         System.out.println(" +-------  Listas de Compras  ----------+ ");
         System.out.println(" ");
@@ -95,5 +95,10 @@ public class MainApplication {
             System.out.println("saindo...");
         }
         return opcao;
+
     }
+
 }
+
+
+
