@@ -1,39 +1,34 @@
 package br.com.shoppinglist.model;
 
 public class TipoItem {
+    private int id;
+    private String desc;
 
-    private Integer id;
-    private String itemDesc;
 
-    public TipoItem() {
-    }
-
-    public TipoItem(Integer id, String itemDesc) {
-        this.id = id;
-        this.itemDesc = itemDesc;
-    }
-
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getItemDesc() {
-        return itemDesc;
+    public  String getDesc() {
+        return desc;
     }
 
-    public void setItemDesc(String itemDesc) {
-        this.itemDesc = itemDesc;
+    public void setDesc(String desc) {
+        this.desc = desc;
+
     }
 
     @Override
     public String toString() {
-        return "TipoItem{" +
+
+        return
                 "id=" + id +
-                ", itemDesc='" + itemDesc + '\'' +
-                '}';
+                ", desc='" + desc + '\''
+                ;
+
     }
 }
