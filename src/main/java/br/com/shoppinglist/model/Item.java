@@ -6,9 +6,16 @@ public class Item {
     private String desc;
     private Double preco;
 
-    private TipoItem tipoItem;
+    private Integer tipoItemId;
 
     public Item() {
+    }
+
+    public Item(Integer id, String desc, Double preco, Integer tipoItemId) {
+        this.id = id;
+        this.desc = desc;
+        this.preco = preco;
+        this.tipoItemId = tipoItemId;
     }
 
     public Integer getId() {
@@ -35,12 +42,12 @@ public class Item {
         this.preco = preco;
     }
 
-    public TipoItem getTipoItem() {
-        return tipoItem;
+    public Integer getTipoItemId() {
+        return tipoItemId;
     }
 
-    public void setTipoItem(TipoItem tipoItem) {
-        this.tipoItem = tipoItem;
+    public void setTipoItemId(Integer tipoItemId) {
+        this.tipoItemId = tipoItemId;
     }
 
     @Override
@@ -48,6 +55,6 @@ public class Item {
         return "id=" + id +
                 ", desc='" + desc + '\'' +
                 ", preco=" + preco +
-                ", tipoItem=" + tipoItem;
+                ", tipoItem=" + tipoItemId;
     }
 }
