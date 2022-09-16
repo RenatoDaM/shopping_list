@@ -17,14 +17,11 @@ public class ListaDeCompraService {
     public void criarListaDeCompras(Lista lista){
         boolean listaUnica = true;
         List<Lista> listas = buscarListasDeCompras();
-        if(!listas.isEmpty()){
-            for (Lista l : listas){
-                if(l.getDesc().equalsIgnoreCase(lista.getDesc())){
+        if(!listas.isEmpty())
+            for (Lista l : listas)
+                if(l.getDesc().equalsIgnoreCase(lista.getDesc()))
                     System.out.println(" +-- Já existe uma lista com esse nome --+ ");
                     listaUnica = false;
-                }
-            }
-        }
         if(listaUnica) crudDAO.save(lista);
     }
 

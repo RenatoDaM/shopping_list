@@ -1,4 +1,3 @@
-
 package br.com.shoppinglist.model;
 
 public class TipoItem {
