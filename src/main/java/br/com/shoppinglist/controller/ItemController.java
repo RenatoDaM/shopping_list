@@ -18,7 +18,6 @@ public class ItemController {
         this.itemService = itemService;
     }
 
-    // ============== ITEM ==============
 
     @PostMapping("/item")
     public ResponseEntity<Object> saveItem(@RequestBody Item item) {
