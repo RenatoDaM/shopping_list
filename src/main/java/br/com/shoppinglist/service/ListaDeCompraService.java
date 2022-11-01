@@ -29,5 +29,17 @@ public class ListaDeCompraService {
     public List<Lista> buscarListasDeCompras(){
         return listaDAO.readAll();
     }
+
+    public void deleteLista(Integer id) {
+        listaDAO.delete(id);
+    }
+
+    public void update(Lista lista) {
+        listaDAO.update(lista);
+    }
+
+    public Lista readById(Integer id) {
+        return (Lista) listaDAO.readById(id);
+    }
 }
 
