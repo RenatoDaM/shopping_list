@@ -3,16 +3,16 @@ package br.com.shoppinglist.model;
 public class Lista {
 
     private Integer id;
-    private String desc;
+    private String listDesc;
     private Double valorTotal;
     private Integer qtdItens;
 
     public Lista() {
     }
 
-    public Lista(Integer id, String desc, Double valorTotal, Integer qtdItens) {
+    public Lista(Integer id, String listDesc, Double valorTotal, Integer qtdItens) {
         this.id = id;
-        this.desc = desc;
+        this.listDesc = listDesc;
         this.valorTotal = valorTotal;
         this.qtdItens = qtdItens;
     }
@@ -21,8 +21,8 @@ public class Lista {
         return id;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getListDesc() {
+        return listDesc;
     }
 
     public Double getValorTotal() {
@@ -33,8 +33,8 @@ public class Lista {
         this.id = id;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setListDesc(String listDesc) {
+        this.listDesc = listDesc;
     }
 
     public void setValorTotal(Double valorTotal) {
@@ -51,6 +51,6 @@ public class Lista {
 
     @Override
     public String toString() {
-        return " [id=" + id + ", desc='" + desc + '\'' + ", valorTotal=" + valorTotal + ", qtdItens=" + qtdItens + "] ";
+        return " [id=" + id + ", desc='" + listDesc + '\'' + ", valorTotal=" + valorTotal + ", qtdItens=" + qtdItens + "] ";
     }
 }

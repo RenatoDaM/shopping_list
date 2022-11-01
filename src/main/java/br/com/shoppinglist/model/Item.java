@@ -3,7 +3,7 @@ package br.com.shoppinglist.model;
 public class Item {
 
     private Integer id;
-    private String desc;
+    private String itemDesc;
     private Double preco;
 
     private Integer tipoItemId;
@@ -11,9 +11,9 @@ public class Item {
     public Item() {
     }
 
-    public Item(Integer id, String desc, Double preco, Integer tipoItemId) {
+    public Item(Integer id, String itemDesc, Double preco, Integer tipoItemId) {
         this.id = id;
-        this.desc = desc;
+        this.itemDesc = itemDesc;
         this.preco = preco;
         this.tipoItemId = tipoItemId;
     }
@@ -26,12 +26,12 @@ public class Item {
         this.id = id;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getItemDesc() {
+        return itemDesc;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setItemDesc(String itemDesc) {
+        this.itemDesc = itemDesc;
     }
 
     public Double getPreco() {
@@ -53,7 +53,7 @@ public class Item {
     @Override
     public String toString() {
         return "id=" + id +
-                ", desc='" + desc + '\'' +
+                ", desc='" + itemDesc + '\'' +
                 ", preco=" + preco +
                 ", tipoItem=" + tipoItemId;
     }

@@ -1,8 +1,19 @@
 package br.com.shoppinglist.model;
 
+
+
 public class TipoItem {
+
     private int id;
-    private String desc;
+    private String tipoDesc;
+
+    public TipoItem(int id, String tipoDesc) {
+        this.id = id;
+        this.tipoDesc = tipoDesc;
+    }
+    public TipoItem() {
+
+    }
 
 
     public int getId() {
@@ -13,12 +24,12 @@ public class TipoItem {
         this.id = id;
     }
 
-    public  String getDesc() {
-        return desc;
+    public  String getTipoDesc() {
+        return tipoDesc;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setTipoDesc(String tipoDesc) {
+        this.tipoDesc = tipoDesc;
 
     }
 
@@ -27,7 +38,7 @@ public class TipoItem {
 
         return
                 "id=" + id +
-                ", desc='" + desc + '\''
+                ", desc='" + tipoDesc + '\''
                 ;
 
     }

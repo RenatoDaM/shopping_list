@@ -1,24 +1,29 @@
 package br.com.shoppinglist.dao.impl;
 
-
-import br.com.shoppinglist.config.ConnectionFactoryConfig;
 import br.com.shoppinglist.dao.CrudDAO;
 import br.com.shoppinglist.model.TipoItem;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
 import java.util.List;
-
+@Repository
 public class TipoItemDAOImpl implements CrudDAO {
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private NamedParameterJdbcTemplate namedParameter;
+
     @Override
     public void save(Object o) {
         TipoItem tipoItem = (TipoItem) o;
-        String sql = "INSERT INTO Tipo_Item(tipo_item_id, tipo_item_desc) VALUES (?, ?)";
-
-        Connection conn = null;
+        String sql = "INSERT INTO tipo_item(tipo_item_id, tipo_item_desc) VALUES (:id, :tipoDesc)";
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource("id", tipoItem.getId());
+        parameterSource.addValue("tipoDesc", tipoItem.getTipoDesc());
+        namedParameter.update(sql, parameterSource);
+ /*       Connection conn = null;
         PreparedStatement pStm = null;
 
         try {
@@ -47,12 +52,17 @@ public class TipoItemDAOImpl implements CrudDAO {
             } catch(Exception e) {
                 e.printStackTrace();
             }
-        }
+        }*/
     }
 
     @Override
     public List<TipoItem> readAll() {
-        String sql = "SELECT * FROM Tipo_Item";
+        String sql = "SELECT tipo_item_id as id, tipo_item_desc as tipoDesc FROM tipo_item";
+        List<TipoItem> resultList = namedParameter.query(sql, new BeanPropertyRowMapper(TipoItem.class));
+        return resultList;
+
+    }
+        /*String sql = "SELECT * FROM Tipo_Item";
 
         List<TipoItem> tipoItemList = new ArrayList<TipoItem>();
 
@@ -67,19 +77,14 @@ public class TipoItemDAOImpl implements CrudDAO {
             rSet = pStm.executeQuery();
 
             while (rSet.next()) {
-                TipoItem tipoItem1 = new TipoItem();
-
-                //Recuperar o id
-                tipoItem1.setId(rSet.getInt("tipo_item_id"));
-                //Recuperar a descricao
-                tipoItem1.setDesc(rSet.getString("tipo_item_desc"));
+                TipoItem tipoItem1 = new TipoItem(rSet.getInt("tipo_item_id"), rSet.getString("tipo_item_desc"));
 
                 tipoItemList.add(tipoItem1);
             }
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 if (rSet != null) {
                     rSet.close();
@@ -90,20 +95,25 @@ public class TipoItemDAOImpl implements CrudDAO {
                 if (conn != null) {
                     conn.close();
                 }
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
         }
         return tipoItemList;
-    }
+    }*/
+
     @Override
     public void update(Object o) {
         TipoItem tipoItem = (TipoItem) o;
-        String sql = "UPDATE Tipo_Item SET tipo_item_desc = ? " +
-                "WHERE tipo_item_id = ?";
+        String sql = "UPDATE Tipo_Item SET tipo_item_desc = :tipoDesc" +
+                " WHERE tipo_item_id = :id";
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource("id", tipoItem.getId());
+        parameterSource.addValue("tipoDesc", tipoItem.getTipoDesc());
+        namedParameter.update(sql, parameterSource);
 
-        Connection conn = null;
+
+        /*Connection conn = null;
         PreparedStatement pStm = null;
 
         try {
@@ -118,28 +128,33 @@ public class TipoItemDAOImpl implements CrudDAO {
 
             //executar a query
             pStm.execute();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            try{
+        } finally {
+            try {
                 if (pStm != null) {
                     pStm.close();
                 }
                 if (conn != null) {
                     conn.close();
                 }
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
         }
 
-
+*/
     }
+
     @Override
     public void delete(Integer id) {
+        String sql = "DELETE FROM Tipo_Item WHERE tipo_item_id = :id";
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource("id", id);
+        namedParameter.update(sql, parameterSource);
+    }
 
-        String sql = "DELETE FROM Tipo_Item WHERE tipo_item_id = ?";
+/*
         Connection conn = null;
         PreparedStatement pStm = null;
 
@@ -148,9 +163,9 @@ public class TipoItemDAOImpl implements CrudDAO {
             pStm = conn.prepareStatement(sql);
             pStm.setInt(1, id);
             pStm.execute();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 if (pStm != null) {
                     pStm.close();
@@ -158,17 +173,33 @@ public class TipoItemDAOImpl implements CrudDAO {
                 if (conn != null) {
                     conn.close();
                 }
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+*/
 
 
-
-    }
     @Override
     public TipoItem readById(Integer id) {
+        String sql = "SELECT tipo_item_id as id, tipo_item_desc as tipoDesc" + " FROM tipo_item WHERE tipo_item_id = :id";
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource("id", id);
+        return namedParameter.queryForObject(sql, parameterSource, new BeanPropertyRowMapper<>(TipoItem.class));
 
+    }
+}
+
+
+
+
+
+
+
+/*
+
+
+
+        /////////////////////////
         Connection conn = null;
         PreparedStatement pStm = null;
         ResultSet rSet = null;
@@ -211,8 +242,8 @@ public class TipoItemDAOImpl implements CrudDAO {
         }
         return null;
 
-    }
-    }
+    }*/
+
 
 
 
