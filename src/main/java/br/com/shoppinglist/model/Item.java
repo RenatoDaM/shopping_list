@@ -4,7 +4,6 @@ public class Item {
 
     private Integer id;
     private String itemDesc;
-    private Double preco;
 
     private Integer tipoItemId;
 
@@ -14,7 +13,6 @@ public class Item {
     public Item(Integer id, String itemDesc, Double preco, Integer tipoItemId) {
         this.id = id;
         this.itemDesc = itemDesc;
-        this.preco = preco;
         this.tipoItemId = tipoItemId;
     }
 
@@ -34,14 +32,6 @@ public class Item {
         this.itemDesc = itemDesc;
     }
 
-    public Double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(Double preco) {
-        this.preco = preco;
-    }
-
     public Integer getTipoItemId() {
         return tipoItemId;
     }
@@ -54,7 +44,6 @@ public class Item {
     public String toString() {
         return "id=" + id +
                 ", desc='" + itemDesc + '\'' +
-                ", preco=" + preco +
                 ", tipoItem=" + tipoItemId;
     }
 }

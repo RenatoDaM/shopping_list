@@ -9,8 +9,10 @@ import br.com.shoppinglist.model.TipoItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+
 @Service
 public class ItemService {
+
     @Autowired
     private ItemDAOImpl itemDAO;
     @Autowired
@@ -22,20 +24,9 @@ public class ItemService {
     // =================== ITEM ===================
 
     public void criarItem(Item item) {
-        boolean tipoUnico = true;
-        List<Item> tipos = buscarItens();
-        if (!tipos.isEmpty()) {
-            for (Item tI : tipos) {
-                if (tI.getItemDesc().equalsIgnoreCase(item.getItemDesc())) {
-                    System.out.println("-- Já existe esse item --");
-                    System.out.println("-- Item não criado... --");
-                    tipoUnico = false;
-                }
-            }
-        }
-        if (tipoUnico) itemDAO.save(item);
-
+        itemDAO.save(item);
     }
+
 
 
     public List<Item> buscarItens() {
@@ -44,7 +35,7 @@ public class ItemService {
     }
 
     public Item readByIdItem(Integer id) {
-       return itemDAO.readById(id);
+       return  itemDAO.readById(id);
     }
 
     public void updateItem(Object o) {
@@ -85,6 +76,10 @@ public class ItemService {
 
     public void deleteTipo(Integer id) {
         tipoItemDAO.delete(id);
+    }
+
+    public boolean existsByItemDesc(Item item) {
+        return itemDAO.readAll().stream().anyMatch(e -> e.getItemDesc().equals(item.getItemDesc()));
     }
 
     // ================== LISTA ITEM =====================
