@@ -2,6 +2,8 @@ package br.com.shoppinglist.dao.impl;
 
 import br.com.shoppinglist.dao.CrudDAO;
 import br.com.shoppinglist.model.Item;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,6 +12,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 @Repository
 public class ItemDAOImpl implements CrudDAO {
     @Autowired
@@ -19,11 +22,10 @@ public class ItemDAOImpl implements CrudDAO {
     @Override
     public void save(Object o) {
         Item item = (Item) o;
-        String sql = "INSERT INTO item(item_id, item_desc, item_preco, Tipo_Item_tipo_item_id) VALUES (:id, :itemDesc, :preco, :tipoItemId)";
+        String sql = "INSERT INTO item(item_id, item_desc, Tipo_Item_tipo_item_id) VALUES (:id, :itemDesc, :tipoItemId)";
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("id", item.getId());
         parameterSource.addValue("itemDesc", item.getItemDesc());
-        parameterSource.addValue("preco", item.getPreco());
         parameterSource.addValue("tipoItemId", item.getTipoItemId());
         namedParameter.update(sql, parameterSource);
 
@@ -52,8 +54,7 @@ public class ItemDAOImpl implements CrudDAO {
 
     @Override
     public List<Item> readAll() {
-        String sql = "SELECT item_id as id, item_desc as itemDesc, item_preco as preco, Tipo_Item_tipo_item_id as tipoItemId"
-                + " FROM item";
+        String sql = "SELECT item_id as id, item_desc as itemDesc, Tipo_Item_tipo_item_id as tipoItemId FROM item";
         List<Item> resultList = namedParameter.query(sql, new BeanPropertyRowMapper(Item.class));
         return resultList;
     }
@@ -81,7 +82,7 @@ public class ItemDAOImpl implements CrudDAO {
 
     @Override
     public Item readById(Integer id) {
-        String sql = "SELECT item_id as id, item_desc as itemDesc, item_preco as preco, tipo_item_tipo_item_id as tipoItemId" +
+        String sql = "SELECT item_id as id, item_desc as itemDesc, tipo_item_tipo_item_id as tipoItemId" +
                 " FROM item WHERE item_id = :id";
         MapSqlParameterSource parameterSource = new MapSqlParameterSource("id", id);
         return namedParameter.queryForObject(sql, parameterSource, new BeanPropertyRowMapper<>(Item.class));
@@ -115,7 +116,6 @@ public class ItemDAOImpl implements CrudDAO {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("id", item.getId());
         parameterSource.addValue("tipoDesc", item.getItemDesc());
-        parameterSource.addValue("preco", item.getPreco());
         parameterSource.addValue("tipoItemId", item.getTipoItemId());
         namedParameter.update(sql, parameterSource);
     }
